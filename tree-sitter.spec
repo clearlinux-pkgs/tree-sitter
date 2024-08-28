@@ -7,7 +7,7 @@
 #
 Name     : tree-sitter
 Version  : 0.23.0
-Release  : 8
+Release  : 9
 URL      : https://github.com/tree-sitter/tree-sitter/archive/v0.23.0/tree-sitter-0.23.0.tar.gz
 Source0  : https://github.com/tree-sitter/tree-sitter/archive/v0.23.0/tree-sitter-0.23.0.tar.gz
 Source1  : http://localhost/cgit/vendor/tree-sitter/snapshot/tree-sitter-2024-08-26-17-00-12.tar.xz
