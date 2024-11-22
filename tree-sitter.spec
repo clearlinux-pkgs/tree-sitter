@@ -7,7 +7,7 @@
 #
 Name     : tree-sitter
 Version  : 0.24.4
-Release  : 10
+Release  : 11
 URL      : https://github.com/tree-sitter/tree-sitter/archive/v0.24.4/tree-sitter-0.24.4.tar.gz
 Source0  : https://github.com/tree-sitter/tree-sitter/archive/v0.24.4/tree-sitter-0.24.4.tar.gz
 Summary  : @PROJECT_DESCRIPTION@
