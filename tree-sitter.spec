@@ -6,13 +6,14 @@
 # autospec commit: 5424026
 #
 Name     : tree-sitter
-Version  : 0.24.4
-Release  : 11
-URL      : https://github.com/tree-sitter/tree-sitter/archive/v0.24.4/tree-sitter-0.24.4.tar.gz
-Source0  : https://github.com/tree-sitter/tree-sitter/archive/v0.24.4/tree-sitter-0.24.4.tar.gz
+Version  : 0.24.5
+Release  : 12
+URL      : https://github.com/tree-sitter/tree-sitter/archive/v0.24.5/tree-sitter-0.24.5.tar.gz
+Source0  : https://github.com/tree-sitter/tree-sitter/archive/v0.24.5/tree-sitter-0.24.5.tar.gz
+Source1  : http://localhost/cgit/vendor/tree-sitter/snapshot/tree-sitter-2024-12-25-08-53-57.tar.gz
 Summary  : @PROJECT_DESCRIPTION@
 Group    : Development/Tools
-License  : MIT
+License  : Apache-2.0 BSD-2-Clause BSD-3-Clause BSL-1.0 GPL-2.0 HPND ICU LGPL-2.1 MIT MPL-2.0 Unicode-DFS-2016 Unlicense Zlib
 Requires: tree-sitter-lib = %{version}-%{release}
 Requires: tree-sitter-license = %{version}-%{release}
 # Suppress stripping binaries
@@ -54,8 +55,12 @@ license components for the tree-sitter package.
 
 
 %prep
-%setup -q -n tree-sitter-0.24.4
-cd %{_builddir}/tree-sitter-0.24.4
+%setup -q -n tree-sitter-0.24.5
+cd %{_builddir}
+tar xf %{_sourcedir}/tree-sitter-2024-12-25-08-53-57.tar.gz
+cd %{_builddir}/tree-sitter-0.24.5
+mkdir -p ./vendor
+cp -r %{_builddir}/tree-sitter-2024-12-25-08-53-57/* %{_builddir}/tree-sitter-0.24.5/./vendor
 mkdir -p .cargo
 echo '[source.crates-io]
 replace-with = "vendored-sources"
@@ -64,7 +69,7 @@ replace-with = "vendored-sources"
 directory = "vendor"
 ' >> .cargo/config.toml
 pushd ..
-cp -a tree-sitter-0.24.4 buildavx2
+cp -a tree-sitter-0.24.5 buildavx2
 popd
 
 %build
@@ -72,7 +77,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1732213680
+export SOURCE_DATE_EPOCH=1735117001
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -115,10 +120,444 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1732213680
+export SOURCE_DATE_EPOCH=1735117001
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tree-sitter
 cp %{_builddir}/tree-sitter-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/d5f7a0af7c0a54f099c103473760335c8d3341c2 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ahash/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ahash/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/2646b6d2453275031022ab245a3a6d5da4ba80b2 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/aho-corasick/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/aho-corasick/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4c8990add9180fc59efa5b0d8faf643c9709501e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/aho-corasick/UNLICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstream/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstream/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle-parse/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/92170cdc034b2ff819323ff670d3b7266c8bffcd || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle-parse/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/64a8c11fd0f3068e743bfc681bcbef4f50a6b779 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle-query/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle-query/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle-wincon/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle-wincon/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/33dbd2d99ad231460bbb01812a52c85e577bd9ba || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anstyle/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/f911b0506e6ba6a56b4edac717b461799f380ef0 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anyhow/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/anyhow/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/arbitrary/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/arbitrary/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/b12c210e78112e40e89cc0e765a6335c6b4636b2 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ascii/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/b2707f0f034cc936597a69b9657b04e5c5cbe225 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ascii/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/f30b44535cec0515071a712b0470674522616128 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bindgen/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/8690c5c1d27c8829def121744e5bcd86f48788ef || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bitflags/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bitflags/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/9f3c36d2b7d381d9cf382a00166f3fbd06783636 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bstr/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bstr/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/99b5dc64e06bf0354ef3baac0ea25c929e4e3a9a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bstr/src/unicode/data/LICENSE-UNICODE %{buildroot}/usr/share/package-licenses/tree-sitter/c4f8de16c29dc84a94d610b716fb1c9c7f143582 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bumpalo/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bumpalo/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/0a1e89ac22450cb0311baa2613bc21b7131b321f || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/byteorder/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/byteorder/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4c8990add9180fc59efa5b0d8faf643c9709501e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/byteorder/UNLICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/bytes/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/2510927d07430a2092720e8f4a5287043f75e8d3 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cc/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cc/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cexpr/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cexpr/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/cd821ffa80099abbc31c22fe770022f3349e0918 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cfg-if/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cfg-if/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cfg_aliases/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/39806df76979277073594a0c19005c3c7fb17221 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/chunked_transfer/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/chunked_transfer/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/2aa704f32bad18e49ac5177a9d6e5e6e50372fc7 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clang-sys/LICENSE.txt %{buildroot}/usr/share/package-licenses/tree-sitter/47b573e3824cd5e02a1a3ae99e2735b49e0256e4 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_builder/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_builder/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/8fe88f09d35c6054e0a780a793833c16fb888168 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_complete/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_complete/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/8fe88f09d35c6054e0a780a793833c16fb888168 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_derive/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_derive/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/8fe88f09d35c6054e0a780a793833c16fb888168 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_lex/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/clap_lex/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/8fe88f09d35c6054e0a780a793833c16fb888168 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cobs/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cobs/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/b478f62f889ff3a199c41e374f4ed4e94c6b8a5e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/colorchoice/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/colorchoice/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/combine/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/a2fe414fa386797e1732d5ad23bab9e6cfa7447b || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/console/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/9a675655c0a9f0bb9c8109678651fe27bceaca04 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/core-foundation-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/core-foundation-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/6c2945f449081ab19640fb7c70a081a1a4559399 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/core-foundation/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/core-foundation/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/6c2945f449081ab19640fb7c70a081a1a4559399 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-bforest/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-codegen-meta/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-codegen-shared/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-codegen/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-control/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-entity/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-frontend/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-native/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/cranelift-wasm/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/crc32fast/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/crc32fast/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/8f178d4cc55689ebdd562cabb1282e33bf8f32fe || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ctor/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/92a74693f02c8e78dd90b2014c52bc35a95bab86 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ctor/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3a7a80be859f41edcaf9989291d2f4b04231d186 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ctrlc/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/8bec88444202e13c35f17f3057132e6a21c287c1 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ctrlc/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/dialoguer/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/9a675655c0a9f0bb9c8109678651fe27bceaca04 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/diff/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/92170cdc034b2ff819323ff670d3b7266c8bffcd || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/diff/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/0db0557c9a1561fa3aa6693747121458bf7ddfcd || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/dirs-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/43a3a49bd7af636c923a5ae475395b8e29320529 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/dirs-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/cf762fa3609793d5639ba9e1cbd254db276f50d3 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/dirs/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/43a3a49bd7af636c923a5ae475395b8e29320529 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/dirs/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/cf762fa3609793d5639ba9e1cbd254db276f50d3 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/either/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/either/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3a86cfdfa553511b381388859c9e94ce9e1f916b || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/embedded-io-0.4.0/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/embedded-io-0.4.0/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/22fe2c96dddd0daae43b0a97057b23a4859be5e8 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/embedded-io/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/embedded-io/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/af141fdffa2a0d286758f3e0daa27c23a1f39fc7 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/encode_unicode/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/encode_unicode/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/188be4108decf997e0edd21c6dd83deaf320f255 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/equivalent/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/equivalent/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/c371f0a7cbb203643d88566665a452f96bf1ab86 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/errno/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/errno/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/7a842f34e127456338641b14c7a00ec246d89fb6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/fallible-iterator/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/fallible-iterator/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4679f9ac0b7f5da9fd22e62c69771ff9331a7a3d || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/fastrand/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/fastrand/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/filetime/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/filetime/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/form_urlencoded/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/form_urlencoded/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/738188f5fed28a950b0fede659706238ec35f8bb || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/fs4/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/fs4/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/fuzzy-matcher/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/6ecda9db6688e939ab91bae50502053404f5a01e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/getrandom/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/e9b475b5dccf14bd66d72dd12a04db75eaad1a9e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/getrandom/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/c8eef3d34d69b1d62fd378fa02150a0bce62fd26 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/gimli/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/gimli/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/git2/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/git2/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/glob/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/glob/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/9f3c36d2b7d381d9cf382a00166f3fbd06783636 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/hashbrown-0.14.5/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/hashbrown-0.14.5/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/c9c1c33aee599ebfdfb0bc2aed9ea082d9e3173a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/hashbrown/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/hashbrown/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/c9c1c33aee599ebfdfb0bc2aed9ea082d9e3173a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/heck-0.4.1/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/heck-0.4.1/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/heck/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/heck/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/home/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/1d47c63586fe3be7f228cff1ab0c029b53741875 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/home/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/html-escape/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/cc3825c3de7e0c8c644a6ed418cb748fd784cfa6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/httpdate/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/1726596c1cc6c65d3a272abc337b13936430cf96 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/httpdate/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/f516ded20090880b5bb281ad2f9dde3d94e9e369 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/id-arena/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/id-arena/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/idna/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/idna/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/a81399b7c3ec2d4619848fd59c11d21211fc3b86 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/indexmap/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/indexmap/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/7e5936a6fa3cf3518c01cec41345adf27399fe12 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/indoc/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/indoc/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/is_terminal_polyfill/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/is_terminal_polyfill/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/itertools-0.12.1/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/itertools-0.12.1/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3a86cfdfa553511b381388859c9e94ce9e1f916b || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/itertools/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/itertools/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3a86cfdfa553511b381388859c9e94ce9e1f916b || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/itoa/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/itoa/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/jni-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/jni-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/e9863e11a6ae28d862197e5fbe364c290b9c1a62 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/jni/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/jni/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/e1618f901b8b4ea54621de7a573824fbfc1f2b13 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/jobserver/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/jobserver/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/js-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/js-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/lazy_static/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/lazy_static/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/2bf5cac862d5a0480b5d5bcd3a1852d68bfeee84 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/leb128/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/leb128/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libc/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libc/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/36d69bcb88153a640740000efe933b009420ce7e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/libgit2/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/9a0a8b6f2c5267ea07842ac3f19fde2c85793606 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/libgit2/deps/llhttp/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/f7eb77642fea2d18bc5b53d361802ca0fb698b3e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/libgit2/deps/pcre/LICENCE %{buildroot}/usr/share/package-licenses/tree-sitter/936db4f914d8b9a516ac93a3bf7856c8bfeb6855 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/libgit2/deps/pcre/cmake/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/tree-sitter/ff3ed70db4739b3c6747c7f624fe2bad70802987 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/libgit2/deps/winhttp/COPYING.GPL %{buildroot}/usr/share/package-licenses/tree-sitter/302250717721b22e804054f10e5a8d9c6e7328c4 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/libgit2/deps/winhttp/COPYING.LGPL %{buildroot}/usr/share/package-licenses/tree-sitter/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libgit2-sys/libgit2/deps/zlib/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/233f44af3fb55dcc7fddfef8e77ac627b0008756 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libloading/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/4ad37fc99fecc5cda018043361f5b12e350e4052 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libm/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libm/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/744183c4ca46703f4b738aca20e238e11c9a3b12 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libredox/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f5a7ee42dcefea5415e6af50baca4e0c338bd8fe || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libz-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libz-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/76c0e372bfabc4a503dd04d9281f808b33ded4f0 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libz-sys/src/zlib-ng/LICENSE.md %{buildroot}/usr/share/package-licenses/tree-sitter/1e0b08e7a2124c67c42261ac819e2340a2dd912c || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libz-sys/src/zlib/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/233f44af3fb55dcc7fddfef8e77ac627b0008756 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/libz-sys/src/zlib/contrib/dotzlib/LICENSE_1_0.txt %{buildroot}/usr/share/package-licenses/tree-sitter/892b34f7865d90a6f949f50d95e49625a10bc7f0 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/linux-raw-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/linux-raw-sys/LICENSE-Apache-2.0_WITH_LLVM-exception %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/linux-raw-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/log/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/log/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/9f3c36d2b7d381d9cf382a00166f3fbd06783636 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/mach2/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/mach2/LICENSE-BSD %{buildroot}/usr/share/package-licenses/tree-sitter/24b715e62cdfc7753030f43432f6dd229d136c25 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/mach2/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/21ecd644e03f61f0d9f8ee3bcc5c207435ff60ca || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/memchr/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/memchr/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4c8990add9180fc59efa5b0d8faf643c9709501e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/memchr/UNLICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/memfd/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/7df059597099bb7dcf25d2a9aedfaf4465f72d8d || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/memfd/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/43b8d6c1a1b26fd324975a5125e85ed98408b5ab || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/minimal-lexical/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5feaf15b3fa7d2d226d811e5fcd49098a1ea520c || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/minimal-lexical/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/minimal-lexical/LICENSE.md %{buildroot}/usr/share/package-licenses/tree-sitter/cd3fe820606ed34ac2591caf068c7cabd3ab3509 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/nix/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/a6fe1503554eb18138838c526d150f58fc104133 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/nom/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/27ea6989d4f34b7b944eb884410a31ae20d11686 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/object/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/object/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/dd2f4bd6d87fe2780fc8e4135ce7dac6ff0b33ee || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/once_cell/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/once_cell/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/openssl-probe/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/openssl-probe/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/openssl-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/option-ext/LICENSE.txt %{buildroot}/usr/share/package-licenses/tree-sitter/8fcc05c0dd9d9c76e948120c9520e4cbe85fb527 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/paste/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/paste/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/path-slash/LICENSE.txt %{buildroot}/usr/share/package-licenses/tree-sitter/caf0a1cf038e9e80e1224686bf8526c0c6d68660 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/percent-encoding/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/percent-encoding/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/a81399b7c3ec2d4619848fd59c11d21211fc3b86 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/pin-project-lite/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/598f87f072f66e2269dd6919292b2934dbb20492 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/pin-project-lite/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/pkg-config/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/pkg-config/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ppv-lite86/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/088830dcb78eba1a2052df69bd5cba5445e8f2d7 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ppv-lite86/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/e1c86f32641f01a5b85d6e9b20138e8470b883fc || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/pretty_assertions/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/pretty_assertions/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4c1c71430c0885114ef42fc256b803241cdcf898 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/prettyplease/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/prettyplease/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/proc-macro2/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/proc-macro2/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/psm/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/b14178d9219feaced7e8b313f9def76386c51ce7 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/psm/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/484cc3dce0ffeb128e73bde74b02603e66d7f13c || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/quote/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/quote/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand/COPYRIGHT %{buildroot}/usr/share/package-licenses/tree-sitter/f14afa20edce530124d39cd56312c7781c19b267 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/4632a631b427f005d97734ea8c6a44090fec5cd9 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/d74ad13f1402c35008f22bc588a6b8199ed164d3 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand_chacha/COPYRIGHT %{buildroot}/usr/share/package-licenses/tree-sitter/f14afa20edce530124d39cd56312c7781c19b267 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand_chacha/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/e9b475b5dccf14bd66d72dd12a04db75eaad1a9e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand_chacha/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/d74ad13f1402c35008f22bc588a6b8199ed164d3 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand_core/COPYRIGHT %{buildroot}/usr/share/package-licenses/tree-sitter/f14afa20edce530124d39cd56312c7781c19b267 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rand_core/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/d74ad13f1402c35008f22bc588a6b8199ed164d3 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/redox_syscall/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/a00165152c82ea55b9fc254890dc8860c25e3bb6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/redox_users/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/c56bd0668edca4d06b6cd881d4d2839da53058cd || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regalloc2/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regex-automata/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regex-automata/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/9f3c36d2b7d381d9cf382a00166f3fbd06783636 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regex-syntax/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regex-syntax/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/9f3c36d2b7d381d9cf382a00166f3fbd06783636 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regex-syntax/src/unicode_tables/LICENSE-UNICODE %{buildroot}/usr/share/package-licenses/tree-sitter/68d12a03b339648117165b9c021b93f26974d6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regex/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/regex/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/9f3c36d2b7d381d9cf382a00166f3fbd06783636 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rustc-hash-1.1.0/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rustc-hash-1.1.0/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rustc-hash/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/ed19a80b922d4e5e50d5b1ed3f0f35c081872d14 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rustc-hash/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/a74c5e048f9ed570eb892f81ca5daf05936475b0 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rustix/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rustix/LICENSE-Apache-2.0_WITH_LLVM-exception %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/rustix/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ryu/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/ryu/LICENSE-BOOST %{buildroot}/usr/share/package-licenses/tree-sitter/3cba29011be2b9d59f6204d6fa0a386b1b2dbd90 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/same-file/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/same-file/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/2ad1215c12bd0a3492399dc438aa63084323c662 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/same-file/UNLICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/semver/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/semver/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde_derive/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde_derive/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde_json/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde_json/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde_spanned/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/serde_spanned/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/shell-words/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/84f97e99da641fa412ca16f122dc89274964bc46 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/shell-words/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/def480ff8f0d4c1c67eb30ba7bd22250b4f98b91 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/shlex/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/a97a2888bca904918b3b9ec008fde1d6e9905a6d || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/shlex/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/64e8197cb5ae680fcf996cc0ac8760e9f1e2e3a6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/similar/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/slice-group-by/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/078f087adf77f5f069ce72c0d56326b143beb438 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/smallbitvec/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/smallbitvec/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/1b1d8d3776317b7dfea5c7ad946ed727d16a89fa || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/smallvec/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/smallvec/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/c61640f6c218caf86d1b8072e09668a8362dba04 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/stable_deref_trait/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/stable_deref_trait/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/f81793ddf50f460d6111fcbc799cab1a804aa000 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/streaming-iterator/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/streaming-iterator/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/f1501d420c9813d44ea46dc5a9d175cc59579d90 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/strsim/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f5feee4154156527645a9b18ef29da23fc859ca9 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/syn/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/syn/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/target-lexicon/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tempfile/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tempfile/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/70693ba8757c4a17af68e39ab32e4e0d4a389416 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/termcolor/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/termcolor/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4c8990add9180fc59efa5b0d8faf643c9709501e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/termcolor/UNLICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/thiserror-impl/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/thiserror-impl/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/thiserror/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/thiserror/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/thread_local/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/thread_local/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/9a2b6b4ad55ec42cf19fc686c74668d3a6303ae7 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tiny_http/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tiny_http/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/06ec49f2eaa274e4270977b8ecc06d01cc4ae821 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tinyvec/LICENSE-APACHE.md %{buildroot}/usr/share/package-licenses/tree-sitter/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tinyvec/LICENSE-MIT.md %{buildroot}/usr/share/package-licenses/tree-sitter/a9f37c2baefe44e0ddb6ee2809a101b2b9ef3935 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tinyvec/LICENSE-ZLIB.md %{buildroot}/usr/share/package-licenses/tree-sitter/9a00b14a56488f555c9ddecdc261e1b4daffb5b8 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tinyvec_macros/LICENSE-APACHE.md %{buildroot}/usr/share/package-licenses/tree-sitter/8cc042e8e4b82c5532c72172a1988a74a599d4b5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tinyvec_macros/LICENSE-MIT.md %{buildroot}/usr/share/package-licenses/tree-sitter/86d193cb6b24df990cbbaf67c6a24fddbcb574c1 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/toml/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/toml/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/toml_datetime/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/toml_datetime/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/toml_edit/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/toml_edit/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tracing-attributes/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/3c8e7847ca19c2bb00f4100c725810c04a1b56d6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tracing-core/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/3c8e7847ca19c2bb00f4100c725810c04a1b56d6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tracing-core/src/spin/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/0956f8ac49e23a546fb113f711d7cdc0c3e98c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/tracing/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/3c8e7847ca19c2bb00f4100c725810c04a1b56d6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-bidi/COPYRIGHT %{buildroot}/usr/share/package-licenses/tree-sitter/871b9912ab96cf7d79cb8ae83ca0b08cd5d0cbfd || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-bidi/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-bidi/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-ident/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-ident/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-ident/LICENSE-UNICODE %{buildroot}/usr/share/package-licenses/tree-sitter/583a5eebcf6119730bd96922e8a0faecf7faf720 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-normalization/COPYRIGHT %{buildroot}/usr/share/package-licenses/tree-sitter/5ed53061419caf64f84d064f3641392a2a10fa7f || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-normalization/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-normalization/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-width/COPYRIGHT %{buildroot}/usr/share/package-licenses/tree-sitter/5ed53061419caf64f84d064f3641392a2a10fa7f || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-width/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-width/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-xid/COPYRIGHT %{buildroot}/usr/share/package-licenses/tree-sitter/5ed53061419caf64f84d064f3641392a2a10fa7f || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-xid/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unicode-xid/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unindent/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/unindent/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/url/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/url/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/a81399b7c3ec2d4619848fd59c11d21211fc3b86 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/utf8-width/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/cc3825c3de7e0c8c644a6ed418cb748fd784cfa6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/utf8parse/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/utf8parse/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/93074692b8a28bef1743c44a9e5b97b1401c0d09 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/vcpkg/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/f85f58f2b17e35a1c2fd852cd58e5bae165ebea9 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/vcpkg/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3ede8a2ceb97cd197183b1a9d7958b57cea01e14 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/version_check/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/version_check/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/cfcb552ef0afbe7ccb4128891c0de00685988a4b || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/walkdir/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/walkdir/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/4c8990add9180fc59efa5b0d8faf643c9709501e || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/walkdir/UNLICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasi/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasi/LICENSE-Apache-2.0_WITH_LLVM-exception %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasi/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-backend/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-backend/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-macro-support/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-macro-support/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-macro/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-macro/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-shared/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen-shared/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasm-bindgen/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasmtime-cranelift/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasmtime-environ/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasmtime-types/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/wasmtime/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/web-sys/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/web-sys/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/webbrowser/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/8f8395cf4e2fd34f2bb875b8e8589dd3dd5d5062 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/webbrowser/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/87cf8ffaf0a2e8427f8cd3e65334bc538aadd9c2 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/winapi-util/COPYING %{buildroot}/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/winapi-util/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/2ad1215c12bd0a3492399dc438aa63084323c662 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/winapi-util/UNLICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys-0.45.0/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys-0.45.0/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys-0.48.0/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys-0.48.0/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys-0.52.0/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys-0.52.0/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-sys/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-targets-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-targets-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-targets-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-targets-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-targets/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows-targets/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_gnullvm-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_gnullvm-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_gnullvm-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_gnullvm-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_gnullvm/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_gnullvm/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_msvc-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_msvc-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_msvc-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_msvc-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_msvc/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_aarch64_msvc/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnu-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnu-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnu-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnu-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnu/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnu/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnullvm/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_gnullvm/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_msvc-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_msvc-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_msvc-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_msvc-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_msvc/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_i686_msvc/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnu-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnu-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnu-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnu-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnu/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnu/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnullvm-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnullvm-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnullvm-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnullvm-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnullvm/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_gnullvm/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_msvc-0.42.2/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_msvc-0.42.2/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_msvc-0.48.5/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_msvc-0.48.5/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_msvc/license-apache-2.0 %{buildroot}/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/windows_x86_64_msvc/license-mit %{buildroot}/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/winnow/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/c0955b5351b1dcafdd0b9bb2d7e84fe0e3d731ca || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/yansi/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/02de591c90bca009ed61834b905d0c7f72573cf2 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/yansi/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/2508ba1b598baf9b1b094b1092ff88a8fae154e7 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy-derive/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/ebbc0758a0322f1bfe28f5438867a084e53941c8 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy-derive/LICENSE-BSD %{buildroot}/usr/share/package-licenses/tree-sitter/46aace8adc5b06990d9ee2b6bd555ea03c4df7a1 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy-derive/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/493b3ee6eb0b5b24708a0a07ab11ad2bc1b49c9c || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/ebbc0758a0322f1bfe28f5438867a084e53941c8 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy/LICENSE-BSD %{buildroot}/usr/share/package-licenses/tree-sitter/46aace8adc5b06990d9ee2b6bd555ea03c4df7a1 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/493b3ee6eb0b5b24708a0a07ab11ad2bc1b49c9c || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy/src/third_party/rust/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zerocopy/src/third_party/rust/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zeroize/LICENSE-APACHE %{buildroot}/usr/share/package-licenses/tree-sitter/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/tree-sitter-2024-12-25-08-53-57/zeroize/LICENSE-MIT %{buildroot}/usr/share/package-licenses/tree-sitter/f24fdeaeee4c59532e32b7c6517d34c8927526fe || :
 export GOAMD64=v2
 GOAMD64=v3
 pushd ../buildavx2/
@@ -145,4 +584,145 @@ GOAMD64=v2
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/tree-sitter/01a6b4bf79aca9b556822601186afab86e8c4fbf
+/usr/share/package-licenses/tree-sitter/02de591c90bca009ed61834b905d0c7f72573cf2
+/usr/share/package-licenses/tree-sitter/06ec49f2eaa274e4270977b8ecc06d01cc4ae821
+/usr/share/package-licenses/tree-sitter/078f087adf77f5f069ce72c0d56326b143beb438
+/usr/share/package-licenses/tree-sitter/088830dcb78eba1a2052df69bd5cba5445e8f2d7
+/usr/share/package-licenses/tree-sitter/0956f8ac49e23a546fb113f711d7cdc0c3e98c85
+/usr/share/package-licenses/tree-sitter/0a1e89ac22450cb0311baa2613bc21b7131b321f
+/usr/share/package-licenses/tree-sitter/0db0557c9a1561fa3aa6693747121458bf7ddfcd
+/usr/share/package-licenses/tree-sitter/1726596c1cc6c65d3a272abc337b13936430cf96
+/usr/share/package-licenses/tree-sitter/188be4108decf997e0edd21c6dd83deaf320f255
+/usr/share/package-licenses/tree-sitter/1b1d8d3776317b7dfea5c7ad946ed727d16a89fa
+/usr/share/package-licenses/tree-sitter/1d47c63586fe3be7f228cff1ab0c029b53741875
+/usr/share/package-licenses/tree-sitter/1e0b08e7a2124c67c42261ac819e2340a2dd912c
+/usr/share/package-licenses/tree-sitter/21ecd644e03f61f0d9f8ee3bcc5c207435ff60ca
+/usr/share/package-licenses/tree-sitter/22fe2c96dddd0daae43b0a97057b23a4859be5e8
+/usr/share/package-licenses/tree-sitter/233f44af3fb55dcc7fddfef8e77ac627b0008756
+/usr/share/package-licenses/tree-sitter/24b715e62cdfc7753030f43432f6dd229d136c25
+/usr/share/package-licenses/tree-sitter/2508ba1b598baf9b1b094b1092ff88a8fae154e7
+/usr/share/package-licenses/tree-sitter/2510927d07430a2092720e8f4a5287043f75e8d3
+/usr/share/package-licenses/tree-sitter/2646b6d2453275031022ab245a3a6d5da4ba80b2
+/usr/share/package-licenses/tree-sitter/27ea6989d4f34b7b944eb884410a31ae20d11686
+/usr/share/package-licenses/tree-sitter/2aa704f32bad18e49ac5177a9d6e5e6e50372fc7
+/usr/share/package-licenses/tree-sitter/2ad1215c12bd0a3492399dc438aa63084323c662
+/usr/share/package-licenses/tree-sitter/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+/usr/share/package-licenses/tree-sitter/2bf5cac862d5a0480b5d5bcd3a1852d68bfeee84
+/usr/share/package-licenses/tree-sitter/302250717721b22e804054f10e5a8d9c6e7328c4
+/usr/share/package-licenses/tree-sitter/33dbd2d99ad231460bbb01812a52c85e577bd9ba
+/usr/share/package-licenses/tree-sitter/36d69bcb88153a640740000efe933b009420ce7e
+/usr/share/package-licenses/tree-sitter/39806df76979277073594a0c19005c3c7fb17221
+/usr/share/package-licenses/tree-sitter/3a7a80be859f41edcaf9989291d2f4b04231d186
+/usr/share/package-licenses/tree-sitter/3a86cfdfa553511b381388859c9e94ce9e1f916b
+/usr/share/package-licenses/tree-sitter/3b042d3d971924ec0296687efd50dbe08b734976
+/usr/share/package-licenses/tree-sitter/3c8e7847ca19c2bb00f4100c725810c04a1b56d6
+/usr/share/package-licenses/tree-sitter/3cba29011be2b9d59f6204d6fa0a386b1b2dbd90
+/usr/share/package-licenses/tree-sitter/3ede8a2ceb97cd197183b1a9d7958b57cea01e14
+/usr/share/package-licenses/tree-sitter/43a3a49bd7af636c923a5ae475395b8e29320529
+/usr/share/package-licenses/tree-sitter/43b8d6c1a1b26fd324975a5125e85ed98408b5ab
+/usr/share/package-licenses/tree-sitter/4632a631b427f005d97734ea8c6a44090fec5cd9
+/usr/share/package-licenses/tree-sitter/4679f9ac0b7f5da9fd22e62c69771ff9331a7a3d
+/usr/share/package-licenses/tree-sitter/46aace8adc5b06990d9ee2b6bd555ea03c4df7a1
+/usr/share/package-licenses/tree-sitter/47b573e3824cd5e02a1a3ae99e2735b49e0256e4
+/usr/share/package-licenses/tree-sitter/484cc3dce0ffeb128e73bde74b02603e66d7f13c
+/usr/share/package-licenses/tree-sitter/493b3ee6eb0b5b24708a0a07ab11ad2bc1b49c9c
+/usr/share/package-licenses/tree-sitter/4ad37fc99fecc5cda018043361f5b12e350e4052
+/usr/share/package-licenses/tree-sitter/4c1c71430c0885114ef42fc256b803241cdcf898
+/usr/share/package-licenses/tree-sitter/4c8990add9180fc59efa5b0d8faf643c9709501e
+/usr/share/package-licenses/tree-sitter/4dbe8833d0189c691b308c3dd40fab84ef2e9630
+/usr/share/package-licenses/tree-sitter/5798832c31663cedc1618d18544d445da0295229
+/usr/share/package-licenses/tree-sitter/583a5eebcf6119730bd96922e8a0faecf7faf720
+/usr/share/package-licenses/tree-sitter/598f87f072f66e2269dd6919292b2934dbb20492
+/usr/share/package-licenses/tree-sitter/5ed53061419caf64f84d064f3641392a2a10fa7f
+/usr/share/package-licenses/tree-sitter/5feaf15b3fa7d2d226d811e5fcd49098a1ea520c
+/usr/share/package-licenses/tree-sitter/60c3522081bf15d7ac1d4c5a63de425ef253e87a
+/usr/share/package-licenses/tree-sitter/64a8c11fd0f3068e743bfc681bcbef4f50a6b779
+/usr/share/package-licenses/tree-sitter/64e8197cb5ae680fcf996cc0ac8760e9f1e2e3a6
+/usr/share/package-licenses/tree-sitter/669a1e53b9dd9df3474300d3d959bb85bad75945
+/usr/share/package-licenses/tree-sitter/689ec0681815ecc32bee639c68e7740add7bd301
+/usr/share/package-licenses/tree-sitter/68d12a03b339648117165b9c021b93f26974d6f6
+/usr/share/package-licenses/tree-sitter/6c2945f449081ab19640fb7c70a081a1a4559399
+/usr/share/package-licenses/tree-sitter/6e5c4711bcae04967d7f5b5e01cf56ae03bebe7a
+/usr/share/package-licenses/tree-sitter/6ecda9db6688e939ab91bae50502053404f5a01e
+/usr/share/package-licenses/tree-sitter/70693ba8757c4a17af68e39ab32e4e0d4a389416
+/usr/share/package-licenses/tree-sitter/738188f5fed28a950b0fede659706238ec35f8bb
+/usr/share/package-licenses/tree-sitter/744183c4ca46703f4b738aca20e238e11c9a3b12
+/usr/share/package-licenses/tree-sitter/76c0e372bfabc4a503dd04d9281f808b33ded4f0
+/usr/share/package-licenses/tree-sitter/7a842f34e127456338641b14c7a00ec246d89fb6
+/usr/share/package-licenses/tree-sitter/7df059597099bb7dcf25d2a9aedfaf4465f72d8d
+/usr/share/package-licenses/tree-sitter/7e5936a6fa3cf3518c01cec41345adf27399fe12
+/usr/share/package-licenses/tree-sitter/84f97e99da641fa412ca16f122dc89274964bc46
+/usr/share/package-licenses/tree-sitter/8690c5c1d27c8829def121744e5bcd86f48788ef
+/usr/share/package-licenses/tree-sitter/86d193cb6b24df990cbbaf67c6a24fddbcb574c1
+/usr/share/package-licenses/tree-sitter/871b9912ab96cf7d79cb8ae83ca0b08cd5d0cbfd
+/usr/share/package-licenses/tree-sitter/87cf8ffaf0a2e8427f8cd3e65334bc538aadd9c2
+/usr/share/package-licenses/tree-sitter/892b34f7865d90a6f949f50d95e49625a10bc7f0
+/usr/share/package-licenses/tree-sitter/8bec88444202e13c35f17f3057132e6a21c287c1
+/usr/share/package-licenses/tree-sitter/8cc042e8e4b82c5532c72172a1988a74a599d4b5
+/usr/share/package-licenses/tree-sitter/8f178d4cc55689ebdd562cabb1282e33bf8f32fe
+/usr/share/package-licenses/tree-sitter/8f8395cf4e2fd34f2bb875b8e8589dd3dd5d5062
+/usr/share/package-licenses/tree-sitter/8fcc05c0dd9d9c76e948120c9520e4cbe85fb527
+/usr/share/package-licenses/tree-sitter/8fe88f09d35c6054e0a780a793833c16fb888168
+/usr/share/package-licenses/tree-sitter/92170cdc034b2ff819323ff670d3b7266c8bffcd
+/usr/share/package-licenses/tree-sitter/92a74693f02c8e78dd90b2014c52bc35a95bab86
+/usr/share/package-licenses/tree-sitter/93074692b8a28bef1743c44a9e5b97b1401c0d09
+/usr/share/package-licenses/tree-sitter/936db4f914d8b9a516ac93a3bf7856c8bfeb6855
+/usr/share/package-licenses/tree-sitter/99b5dc64e06bf0354ef3baac0ea25c929e4e3a9a
+/usr/share/package-licenses/tree-sitter/9a00b14a56488f555c9ddecdc261e1b4daffb5b8
+/usr/share/package-licenses/tree-sitter/9a0a8b6f2c5267ea07842ac3f19fde2c85793606
+/usr/share/package-licenses/tree-sitter/9a2b6b4ad55ec42cf19fc686c74668d3a6303ae7
+/usr/share/package-licenses/tree-sitter/9a675655c0a9f0bb9c8109678651fe27bceaca04
+/usr/share/package-licenses/tree-sitter/9f3c36d2b7d381d9cf382a00166f3fbd06783636
+/usr/share/package-licenses/tree-sitter/a00165152c82ea55b9fc254890dc8860c25e3bb6
+/usr/share/package-licenses/tree-sitter/a2fe414fa386797e1732d5ad23bab9e6cfa7447b
+/usr/share/package-licenses/tree-sitter/a3b3a65335e78bde163f84d599fa899776552994
+/usr/share/package-licenses/tree-sitter/a6fe1503554eb18138838c526d150f58fc104133
+/usr/share/package-licenses/tree-sitter/a74c5e048f9ed570eb892f81ca5daf05936475b0
+/usr/share/package-licenses/tree-sitter/a81399b7c3ec2d4619848fd59c11d21211fc3b86
+/usr/share/package-licenses/tree-sitter/a97a2888bca904918b3b9ec008fde1d6e9905a6d
+/usr/share/package-licenses/tree-sitter/a9f37c2baefe44e0ddb6ee2809a101b2b9ef3935
+/usr/share/package-licenses/tree-sitter/af141fdffa2a0d286758f3e0daa27c23a1f39fc7
+/usr/share/package-licenses/tree-sitter/b12c210e78112e40e89cc0e765a6335c6b4636b2
+/usr/share/package-licenses/tree-sitter/b14178d9219feaced7e8b313f9def76386c51ce7
+/usr/share/package-licenses/tree-sitter/b2707f0f034cc936597a69b9657b04e5c5cbe225
+/usr/share/package-licenses/tree-sitter/b478f62f889ff3a199c41e374f4ed4e94c6b8a5e
+/usr/share/package-licenses/tree-sitter/c0955b5351b1dcafdd0b9bb2d7e84fe0e3d731ca
+/usr/share/package-licenses/tree-sitter/c371f0a7cbb203643d88566665a452f96bf1ab86
+/usr/share/package-licenses/tree-sitter/c4f8de16c29dc84a94d610b716fb1c9c7f143582
+/usr/share/package-licenses/tree-sitter/c56bd0668edca4d06b6cd881d4d2839da53058cd
+/usr/share/package-licenses/tree-sitter/c61640f6c218caf86d1b8072e09668a8362dba04
+/usr/share/package-licenses/tree-sitter/c8eef3d34d69b1d62fd378fa02150a0bce62fd26
+/usr/share/package-licenses/tree-sitter/c9c1c33aee599ebfdfb0bc2aed9ea082d9e3173a
+/usr/share/package-licenses/tree-sitter/caf0a1cf038e9e80e1224686bf8526c0c6d68660
+/usr/share/package-licenses/tree-sitter/cc3825c3de7e0c8c644a6ed418cb748fd784cfa6
+/usr/share/package-licenses/tree-sitter/cd3fe820606ed34ac2591caf068c7cabd3ab3509
+/usr/share/package-licenses/tree-sitter/cd821ffa80099abbc31c22fe770022f3349e0918
+/usr/share/package-licenses/tree-sitter/ce3a2603094e799f42ce99c40941544dfcc5c4a5
+/usr/share/package-licenses/tree-sitter/cf762fa3609793d5639ba9e1cbd254db276f50d3
+/usr/share/package-licenses/tree-sitter/cfcb552ef0afbe7ccb4128891c0de00685988a4b
 /usr/share/package-licenses/tree-sitter/d5f7a0af7c0a54f099c103473760335c8d3341c2
+/usr/share/package-licenses/tree-sitter/d74ad13f1402c35008f22bc588a6b8199ed164d3
+/usr/share/package-licenses/tree-sitter/dd2f4bd6d87fe2780fc8e4135ce7dac6ff0b33ee
+/usr/share/package-licenses/tree-sitter/dd445710e6e4caccc4f8a587a130eaeebe83f6f6
+/usr/share/package-licenses/tree-sitter/def480ff8f0d4c1c67eb30ba7bd22250b4f98b91
+/usr/share/package-licenses/tree-sitter/e1618f901b8b4ea54621de7a573824fbfc1f2b13
+/usr/share/package-licenses/tree-sitter/e1c86f32641f01a5b85d6e9b20138e8470b883fc
+/usr/share/package-licenses/tree-sitter/e9863e11a6ae28d862197e5fbe364c290b9c1a62
+/usr/share/package-licenses/tree-sitter/e9b475b5dccf14bd66d72dd12a04db75eaad1a9e
+/usr/share/package-licenses/tree-sitter/ebbc0758a0322f1bfe28f5438867a084e53941c8
+/usr/share/package-licenses/tree-sitter/ed19a80b922d4e5e50d5b1ed3f0f35c081872d14
+/usr/share/package-licenses/tree-sitter/f137043e018f2024e0414a9153ea728c203ae8e5
+/usr/share/package-licenses/tree-sitter/f14afa20edce530124d39cd56312c7781c19b267
+/usr/share/package-licenses/tree-sitter/f1501d420c9813d44ea46dc5a9d175cc59579d90
+/usr/share/package-licenses/tree-sitter/f24fdeaeee4c59532e32b7c6517d34c8927526fe
+/usr/share/package-licenses/tree-sitter/f30b44535cec0515071a712b0470674522616128
+/usr/share/package-licenses/tree-sitter/f516ded20090880b5bb281ad2f9dde3d94e9e369
+/usr/share/package-licenses/tree-sitter/f5a7ee42dcefea5415e6af50baca4e0c338bd8fe
+/usr/share/package-licenses/tree-sitter/f5feee4154156527645a9b18ef29da23fc859ca9
+/usr/share/package-licenses/tree-sitter/f7eb77642fea2d18bc5b53d361802ca0fb698b3e
+/usr/share/package-licenses/tree-sitter/f81793ddf50f460d6111fcbc799cab1a804aa000
+/usr/share/package-licenses/tree-sitter/f85f58f2b17e35a1c2fd852cd58e5bae165ebea9
+/usr/share/package-licenses/tree-sitter/f911b0506e6ba6a56b4edac717b461799f380ef0
+/usr/share/package-licenses/tree-sitter/ff007ce11f3ff7964f1a5b04202c4e95b5c82c85
+/usr/share/package-licenses/tree-sitter/ff3ed70db4739b3c6747c7f624fe2bad70802987
