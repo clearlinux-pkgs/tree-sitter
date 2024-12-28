@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : tree-sitter
-Version  : 0.24.5
-Release  : 12
-URL      : https://github.com/tree-sitter/tree-sitter/archive/v0.24.5/tree-sitter-0.24.5.tar.gz
-Source0  : https://github.com/tree-sitter/tree-sitter/archive/v0.24.5/tree-sitter-0.24.5.tar.gz
+Version  : 0.24.6
+Release  : 13
+URL      : https://github.com/tree-sitter/tree-sitter/archive/v0.24.6/tree-sitter-0.24.6.tar.gz
+Source0  : https://github.com/tree-sitter/tree-sitter/archive/v0.24.6/tree-sitter-0.24.6.tar.gz
 Source1  : http://localhost/cgit/vendor/tree-sitter/snapshot/tree-sitter-2024-12-25-08-53-57.tar.gz
 Summary  : @PROJECT_DESCRIPTION@
 Group    : Development/Tools
@@ -55,12 +55,12 @@ license components for the tree-sitter package.
 
 
 %prep
-%setup -q -n tree-sitter-0.24.5
+%setup -q -n tree-sitter-0.24.6
 cd %{_builddir}
 tar xf %{_sourcedir}/tree-sitter-2024-12-25-08-53-57.tar.gz
-cd %{_builddir}/tree-sitter-0.24.5
+cd %{_builddir}/tree-sitter-0.24.6
 mkdir -p ./vendor
-cp -r %{_builddir}/tree-sitter-2024-12-25-08-53-57/* %{_builddir}/tree-sitter-0.24.5/./vendor
+cp -r %{_builddir}/tree-sitter-2024-12-25-08-53-57/* %{_builddir}/tree-sitter-0.24.6/./vendor
 mkdir -p .cargo
 echo '[source.crates-io]
 replace-with = "vendored-sources"
@@ -69,7 +69,7 @@ replace-with = "vendored-sources"
 directory = "vendor"
 ' >> .cargo/config.toml
 pushd ..
-cp -a tree-sitter-0.24.5 buildavx2
+cp -a tree-sitter-0.24.6 buildavx2
 popd
 
 %build
@@ -77,7 +77,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1735117001
+export SOURCE_DATE_EPOCH=1735399961
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -120,7 +120,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1735117001
+export SOURCE_DATE_EPOCH=1735399961
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tree-sitter
 cp %{_builddir}/tree-sitter-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/tree-sitter/d5f7a0af7c0a54f099c103473760335c8d3341c2 || :
