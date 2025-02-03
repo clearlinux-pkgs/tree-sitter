@@ -7,7 +7,7 @@
 #
 Name     : tree-sitter
 Version  : 0.25.1
-Release  : 15
+Release  : 16
 URL      : https://github.com/tree-sitter/tree-sitter/archive/v0.25.1/tree-sitter-0.25.1.tar.gz
 Source0  : https://github.com/tree-sitter/tree-sitter/archive/v0.25.1/tree-sitter-0.25.1.tar.gz
 Source1  : http://localhost/cgit/vendor/tree-sitter/snapshot/tree-sitter-2025-02-03-15-00-52.tar.gz
