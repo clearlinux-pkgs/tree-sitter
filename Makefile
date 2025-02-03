@@ -1,5 +1,5 @@
 PKG_NAME := tree-sitter
-URL = https://github.com/tree-sitter/tree-sitter/archive/v0.24.7/tree-sitter-0.24.7.tar.gz
-ARCHIVES = $(CGIT_BASE_URL)/vendor/tree-sitter/snapshot/tree-sitter-2024-12-25-08-53-57.tar.gz ./vendor
+URL = https://github.com/tree-sitter/tree-sitter/archive/v0.25.1/tree-sitter-0.25.1.tar.gz
+ARCHIVES = $(CGIT_BASE_URL)/vendor/tree-sitter/snapshot/tree-sitter-2025-02-03-15-00-52.tar.gz ./vendor
 
 include ../common/Makefile.common
